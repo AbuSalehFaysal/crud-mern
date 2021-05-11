@@ -13,6 +13,7 @@ function App() {
       userName: userName,
       userContact: userContact,
     });
+    window.location.reload(false);
   };
   const [addresses, setAddresses] = useState([]);
   useEffect(() => {

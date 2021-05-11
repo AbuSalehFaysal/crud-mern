@@ -13,7 +13,7 @@ const AddressList = (props) => {
             id: id,
             newUserName: newUserName,
         });
-        // window.location.reload(true);
+        window.location.reload(false);
     };
 
     const [newUserContact, setNewUserContact] = useState('');
@@ -24,7 +24,15 @@ const AddressList = (props) => {
             id: id,
             newUserContact: newUserContact,
         });
-        // window.location.reload(true);
+        window.location.reload(false);
+    };
+
+    const deleteUser = (id) => {
+
+        axios.delete(`http://localhost:5000/delete/${id}`, {
+            
+        });
+        window.location.reload(false);
     };
 
     return (
@@ -50,6 +58,7 @@ const AddressList = (props) => {
                 />
                 <button onClick={() => updateUserContact(_id)}>Update</button>
             </form>
+            <button onClick={() => deleteUser(_id)}>Delete</button>
             <hr />
         </div>
     );

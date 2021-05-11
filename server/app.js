@@ -67,6 +67,13 @@ app.put("/updatecontact", async (req, res) => {
     }
 })
 
+app.delete("/delete/:id", async (req, res) => {
+    const id = req.params.id;
+    // res.send(id);
+    await AddressModel.findByIdAndRemove(id).exec();
+    res.send("deleted");
+})
+
 
 
 app.listen(port, () => {
