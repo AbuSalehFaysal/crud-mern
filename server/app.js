@@ -52,6 +52,21 @@ app.put("/update", async (req, res) => {
     }
 })
 
+app.put("/updatecontact", async (req, res) => {
+    const newUserContact = req.body.newUserContact;
+    const id = req.body.id;
+    // console.log(newUserName);
+    try {
+        await AddressModel.findById(id, (error, updatedUserContact)=> {
+            updatedUserContact.userContact = newUserContact;
+            updatedUserContact.save();
+            res.send("update-contact");
+        });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 
 
 app.listen(port, () => {

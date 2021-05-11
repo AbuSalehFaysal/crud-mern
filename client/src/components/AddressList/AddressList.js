@@ -16,6 +16,17 @@ const AddressList = (props) => {
         // window.location.reload(true);
     };
 
+    const [newUserContact, setNewUserContact] = useState('');
+
+    const updateUserContact = (id) => {
+
+        axios.put("http://localhost:5000/updatecontact", {
+            id: id,
+            newUserContact: newUserContact,
+        });
+        // window.location.reload(true);
+    };
+
     return (
         <div>
             <h1>{userName} -- {userContact}</h1>
@@ -29,6 +40,17 @@ const AddressList = (props) => {
                 />
                 <button onClick={() => updateUserName(_id)}>Update</button>
             </form>
+            <form action="">
+                <input
+                    type="text"
+                    placeholder="New User Contact"
+                    onChange={(event) => {
+                        setNewUserContact(event.target.value);
+                    }}
+                />
+                <button onClick={() => updateUserContact(_id)}>Update</button>
+            </form>
+            <hr />
         </div>
     );
 };
