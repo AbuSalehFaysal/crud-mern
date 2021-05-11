@@ -9,8 +9,6 @@ function App() {
   const [userName, setUserName] = useState('');
   const [userContact, setUserContact] = useState('');
   const addToList = () => {
-    // window.location.reload(false);
-    // console.log(userName + userContact);
     axios.post("http://localhost:5000/insert", {
       userName: userName,
       userContact: userContact,
@@ -32,7 +30,6 @@ function App() {
         <input type="text" name="" id="" onChange={(event) => { setUserName(event.target.value) }} required />
         <label htmlFor="">Contact Number: </label>
         <input type="text" name="" id="" onChange={(event) => { setUserContact(event.target.value) }} required />
-        {/* <button onClick={addToList}>Submit</button> */}
         <button onClick={addToList} type="submit">Submit</button>
       </form>
 

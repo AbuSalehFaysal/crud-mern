@@ -37,10 +37,10 @@ app.get("/address", async (req, res) => {
     })
 })
 
-app.put("/updateusername", async (req, res) => {
+app.put("/update", async (req, res) => {
     const newUserName = req.body.newUserName;
     const id = req.body.id;
-    console.log(newUserName);
+    // console.log(newUserName);
     try {
         await AddressModel.findById(id, (error, updatedUserName)=> {
             updatedUserName.userName = newUserName;
