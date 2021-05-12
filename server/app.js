@@ -24,6 +24,7 @@ app.post("/insert", async (req, res) => {
         console.log("DATA INSERTED");
     } catch (error) {
         console.log(error);
+        alert(error);
     }
 })
 

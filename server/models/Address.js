@@ -7,6 +7,7 @@ const AddressSchema = new mongoose.Schema({
     },
     userContact: {
         type: String,
+        unique: true,
         required: true,
     }
 });
