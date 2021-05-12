@@ -3,14 +3,14 @@ const app = express();
 const cors = require("cors");
 const mongoose = require('mongoose');
 const port = 5000;
+require('dotenv').config();
 
 const AddressModel = require("./models/Address")
 
 app.use(express.json());
 app.use(cors());
-// Y1x6666y7mjKLNAX
 
-mongoose.connect("mongodb+srv://AbuSalehFaysal:Y1x6666y7mjKLNAX@cluster-crud-mern.x2kp6.mongodb.net/crudMern", {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster-crud-mern.x2kp6.mongodb.net/${process.env.DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
