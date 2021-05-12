@@ -42,7 +42,7 @@ const AddressList = (props) => {
             <h5 className="card-header">Information Detail</h5>
             <div className="card-body">
                 <h5 className="card-title">Name: {userName}</h5>
-                <p className="card-text">Contact No: {userContact}</p>
+                <p className="card-text">Mobile Number: {userContact}</p>
                 <div className="row">
                     <div className="col-md-2">
                         <form action="">
