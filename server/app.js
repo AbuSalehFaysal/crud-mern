@@ -1,15 +1,23 @@
+// =================================================================
+// REQUIRED PACKAGES
+// =================================================================
 const express = require('express');
 const app = express();
 const cors = require("cors");
 const mongoose = require('mongoose');
 const port = 5000;
 require('dotenv').config();
-
 const AddressModel = require("./models/Address")
 
+// =================================================================
+// APP USE
+// =================================================================
 app.use(express.json());
 app.use(cors());
 
+// =================================================================
+// DATABASE CONNECTION
+// =================================================================
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster-crud-mern.x2kp6.mongodb.net/${process.env.DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -17,6 +25,9 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cl
     useCreateIndex: true
 });
 
+// =================================================================
+// POST DATA ROUTE
+// =================================================================
 app.post("/insert", async (req, res) => {
     const userName = req.body.userName;
     const userContact = req.body.userContact;
@@ -30,8 +41,10 @@ app.post("/insert", async (req, res) => {
     }
 })
 
+// =================================================================
+// GET ALL DATA ROUTE
+// =================================================================
 app.get("/address", async (req, res) => {
-    
     AddressModel.find({}, (err, result) => {
         if (err) {
             res.send(err);
@@ -42,10 +55,12 @@ app.get("/address", async (req, res) => {
     .sort({ userName: 1 });
 })
 
+// =================================================================
+// UPDATE NAME DATA ROUTE
+// =================================================================
 app.put("/update", async (req, res) => {
     const newUserName = req.body.newUserName;
     const id = req.body.id;
-    // console.log(newUserName);
     try {
         await AddressModel.findById(id, (error, updatedUserName)=> {
             updatedUserName.userName = newUserName;
@@ -57,10 +72,12 @@ app.put("/update", async (req, res) => {
     }
 })
 
+// =================================================================
+// UPDATE CONTACT DATA ROUTE
+// =================================================================
 app.put("/updatecontact", async (req, res) => {
     const newUserContact = req.body.newUserContact;
     const id = req.body.id;
-    // console.log(newUserName);
     try {
         await AddressModel.findById(id, (error, updatedUserContact)=> {
             updatedUserContact.userContact = newUserContact;
@@ -72,6 +89,9 @@ app.put("/updatecontact", async (req, res) => {
     }
 })
 
+// =================================================================
+// DELETE DATA ROUTE
+// =================================================================
 app.delete("/delete/:id", async (req, res) => {
     const id = req.params.id;
     // res.send(id);
@@ -79,8 +99,9 @@ app.delete("/delete/:id", async (req, res) => {
     res.send("deleted");
 })
 
-
-
-app.listen(port, () => {
+// =================================================================
+// APP LISTEN 
+// =================================================================
+app.listen(process.env.PORT || port, () => {
     console.log("SERVER HAS STARTED!!!");
 })

@@ -1,25 +1,29 @@
+// ==============================================================
+// IMPORT
+// ==============================================================
 import React, { useState } from 'react';
 import './AddressList.css'
 import axios from 'axios';
 
+// ==============================================================
+// PASSING DATA USING PROPS
+// ==============================================================
 const AddressList = (props) => {
     const { _id, userName, userContact } = props.address;
 
+    // ==============================================================
+    // UPDATE DATA
+    // ==============================================================
     const [newUserName, setNewUserName] = useState('');
-
     const updateUserName = (id) => {
-
         axios.put("http://localhost:5000/update", {
             id: id,
             newUserName: newUserName,
         });
         window.location.reload(false);
     };
-
     const [newUserContact, setNewUserContact] = useState('');
-
     const updateUserContact = (id) => {
-
         axios.put("http://localhost:5000/updatecontact", {
             id: id,
             newUserContact: newUserContact,
@@ -27,22 +31,25 @@ const AddressList = (props) => {
         window.location.reload(false);
     };
 
+    // ==============================================================
+    // DELETE DATA
+    // ==============================================================
     const deleteUser = (id) => {
-
         axios.delete(`http://localhost:5000/delete/${id}`, {
-
         });
         window.location.reload(false);
     };
-
-
 
     return (
         <div className="card">
             <h5 className="card-header">Information Detail</h5>
             <div className="card-body">
+
+                {/* SHOWING DATA */}
                 <h5 className="card-title">Name: {userName}</h5>
                 <p className="card-text">Mobile Number: {userContact}</p>
+
+                {/* EDIT DATA */}
                 <div className="row">
                     <div className="col-md-2">
                         <form action="">
@@ -55,7 +62,6 @@ const AddressList = (props) => {
                                 }}
                             />
                         </form>
-
                     </div>
                     <div className="col-md-2">
                         <button className="btn btn-info" onClick={() => updateUserName(_id)}>Update Name</button>
@@ -70,44 +76,19 @@ const AddressList = (props) => {
                                     setNewUserContact(event.target.value);
                                 }}
                             />
-
                         </form>
                     </div>
                     <div className="col-md-2">
                         <button className="btn btn-info" onClick={() => updateUserContact(_id)}>Update Contact</button>
                     </div>
+
+                    {/* DELETE DATA */}
                     <div className="col-md-4">
                         <button className="btn btn-danger" onClick={() => deleteUser(_id)}>Delete Information</button>
                     </div>
                 </div>
-
             </div>
         </div>
-        // <div>
-        //     <h1>{userName} -- {userContact}</h1>
-        //     <form action="">
-        //         <input
-        //             type="text"
-        //             placeholder="New Name"
-        //             onChange={(event) => {
-        //                 setNewUserName(event.target.value);
-        //             }}
-        //         />
-        //         <button onClick={() => updateUserName(_id)}>Update</button>
-        //     </form>
-        //     <form action="">
-        //         <input
-        //             type="text"
-        //             placeholder="New User Contact"
-        //             onChange={(event) => {
-        //                 setNewUserContact(event.target.value);
-        //             }}
-        //         />
-        //         <button onClick={() => updateUserContact(_id)}>Update</button>
-        //     </form>
-        //     <button onClick={() => deleteUser(_id)}>Delete</button>
-        //     <hr />
-        // </div>
     );
 };
 
