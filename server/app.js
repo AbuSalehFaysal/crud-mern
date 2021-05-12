@@ -28,6 +28,7 @@ app.post("/insert", async (req, res) => {
 })
 
 app.get("/address", async (req, res) => {
+    
     AddressModel.find({}, (err, result) => {
         if (err) {
             res.send(err);
@@ -35,6 +36,7 @@ app.get("/address", async (req, res) => {
             res.send(result);
         }
     })
+    .sort({ userName: 1 });
 })
 
 app.put("/update", async (req, res) => {

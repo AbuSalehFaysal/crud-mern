@@ -35,6 +35,8 @@ const AddressList = (props) => {
         window.location.reload(false);
     };
 
+    
+
     return (
         <div>
             <h1>{userName} -- {userContact}</h1>

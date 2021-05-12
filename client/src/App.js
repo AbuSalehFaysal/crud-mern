@@ -6,6 +6,7 @@ import AddressList from './components/AddressList/AddressList';
 
 
 function App() {
+
   const [userName, setUserName] = useState('');
   const [userContact, setUserContact] = useState('');
   const addToList = () => {
@@ -16,6 +17,7 @@ function App() {
     window.location.reload(false);
   };
   const [addresses, setAddresses] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:5000/address")
       .then(res => res.json())
@@ -23,6 +25,9 @@ function App() {
         setAddresses(data);
       })
   }, [])
+
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <div className="App">
       <h1>Simple Address Book Manager </h1>
@@ -35,8 +40,15 @@ function App() {
       </form>
 
       <hr />
+      <input type="text" name="" id="" placeholder="Enter Name Here..." onChange={event => {setSearchTerm(event.target.value)}}/>
       {
-        addresses.map(address => <AddressList key={address._id} address={address}></AddressList>)
+        addresses.filter((val) => {
+          if (searchTerm == "") {
+            return val;
+          } else if (val.userName.toLowerCase().includes(searchTerm.toLowerCase())) {
+            return val;
+          }
+        }).map(address => <AddressList key={address._id} address={address}></AddressList>)
       }
     </div>
   );
