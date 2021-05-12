@@ -13,6 +13,8 @@ app.use(cors());
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster-crud-mern.x2kp6.mongodb.net/${process.env.DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
 });
 
 app.post("/insert", async (req, res) => {
